@@ -1,0 +1,9 @@
+name: airbrake
+version: 0.0.1
+
+authors:
+  - klacointe <kevinlacointe@gmail.com>
+
+crystal: 0.24.1
+
+license: MIT
