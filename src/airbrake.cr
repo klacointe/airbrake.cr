@@ -12,6 +12,7 @@ module Airbrake
   end
 
   def self.notify(exception)
+    return unless should_notify?
     check_config!
     response = HTTP::Client.post(
       Airbrake.config.uri,
@@ -22,6 +23,10 @@ module Airbrake
       body: Airbrake::Error.payload(exception)
     )
     Hash(String, String).from_json(response.body)
+  end
+
+  def self.should_notify?
+    !config.development_environments.includes?(ENV.fetch("CRYSTAL_ENV", "development"))
   end
 
   def self.configure

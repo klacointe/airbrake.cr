@@ -4,10 +4,12 @@ module Airbrake
     property project_key : String | Nil
     property endpoint : String = "https://airbrake.io"
     property user_agent : String = "Airbrake Crystal"
+    property development_environments : Array(String) = ["development", "test"]
     getter project_id
     getter project_key
     getter endpoint
     getter user_agent
+    getter development_environments
 
     INSTANCE = Config.new
 

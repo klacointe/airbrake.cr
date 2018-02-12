@@ -23,6 +23,8 @@ Airbrake.configure do |config|
 
   # Optional, use airbrake endpoint by default
   config.endpoint = "http://host.tld"
+  # Optional, use ["development", "test"] by default
+  config.development_environments = ["development", "test"]
 end
 ```
 
