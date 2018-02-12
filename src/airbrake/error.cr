@@ -19,7 +19,7 @@ module Airbrake
             json.object do
               json.field "name", Airbrake.config.user_agent
               json.field "version", Airbrake::VERSION
-              json.field "url", "https://github.com/klacointe/airbrake-crystal"
+              json.field "url", "https://github.com/klacointe/airbrake.cr"
             end
           end
           json.field "errors" do
