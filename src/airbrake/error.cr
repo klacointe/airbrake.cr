@@ -13,7 +13,7 @@ module Airbrake
       end
     end
 
-    def self.payload(exception)
+    def self.payload(exception, params = {} of String => String)
       JSON.build do |json|
         json.object do
           json.field "notifier" do
@@ -43,10 +43,7 @@ module Airbrake
             json.object do
             end
           end
-          json.field "params" do
-            json.object do
-            end
-          end
+          json.field "params", params
         end
       end
     end

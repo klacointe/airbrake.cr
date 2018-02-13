@@ -11,7 +11,7 @@ module Airbrake
     end
   end
 
-  def self.notify(exception)
+  def self.notify(exception, params = {} of String => String)
     return unless should_notify?
     check_config!
     response = HTTP::Client.post(
@@ -20,7 +20,7 @@ module Airbrake
         "Content-Type" => "application/json",
         "User-Agent" => Airbrake.config.user_agent
       },
-      body: Airbrake::Error.payload(exception)
+      body: Airbrake::Error.payload(exception, params)
     )
     Hash(String, String).from_json(response.body)
   end
