@@ -3,6 +3,7 @@ module Airbrake
     STACKFRAME_TEMPLATE = /\A(.+):(\d+):(\d+) in '(.+)'/
 
     def self.backtrace(exception)
+      return unless exception.backtrace?
       (exception.backtrace || [] of String).map do |stackframe|
         if m = stackframe.match(STACKFRAME_TEMPLATE)
           { file: m[1]? || "<crystal>" , line: m[2]?.try(&.to_i) || 0, function: m[4]? || "<file>" }
