@@ -1,3 +1,5 @@
+require "json"
+
 module Airbrake
   class Error
     STACKFRAME_TEMPLATE = /\A(.+):(\d+):(\d+) in '(.+)'/

@@ -1,4 +1,5 @@
 require "./airbrake/*"
+require "http/client"
 
 module Airbrake
 
