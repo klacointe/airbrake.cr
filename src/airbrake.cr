@@ -2,7 +2,6 @@ require "./airbrake/*"
 require "http/client"
 
 module Airbrake
-
   def self.handle(&block)
     begin
       yield
@@ -19,7 +18,7 @@ module Airbrake
       Airbrake.config.uri,
       headers: HTTP::Headers{
         "Content-Type" => "application/json",
-        "User-Agent" => Airbrake.config.user_agent
+        "User-Agent"   => Airbrake.config.user_agent,
       },
       body: Airbrake::Error.payload(exception, params)
     )
