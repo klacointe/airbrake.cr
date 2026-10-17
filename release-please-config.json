@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "03bb6ab9c7dbf69e755e5c8477c92f3aa260dd7d",
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "package-name": "airbrake",
+      "include-component-in-tag": false,
+      "bump-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "shard.yml"
+        },
+        {
+          "type": "generic",
+          "path": "src/airbrake/version.cr"
+        }
+      ]
+    }
+  }
+}
