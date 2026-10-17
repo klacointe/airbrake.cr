@@ -1,3 +1,3 @@
 module Airbrake
-  VERSION = "0.0.1" # x-release-please-version
+  VERSION = "0.0.2" # x-release-please-version
 end
