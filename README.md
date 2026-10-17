@@ -38,6 +38,10 @@ rescue ex
 end
 ```
 
+`notify` returns the Airbrake response (e.g. `{"id" => "...", "url" => "..."}`),
+or `nil` when nothing was sent (development environments) or when Airbrake
+replies with an error. Network errors are raised.
+
 ### Automatic notifications
 
 ```crystal
@@ -46,10 +50,14 @@ Airbrake.handle do
 end
 ```
 
+The exception is always re-raised. If notifying Airbrake fails, a warning is
+logged on the `airbrake` log source instead of hiding the original exception.
 
 ## Development
 
-TODO: Write development instructions here
+```sh
+crystal spec
+```
 
 ## Contributing
 

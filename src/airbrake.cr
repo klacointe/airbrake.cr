@@ -2,12 +2,15 @@ require "./airbrake/*"
 require "http/client"
 
 module Airbrake
-
   def self.handle(&block)
     begin
       yield
     rescue ex
-      notify(ex)
+      begin
+        notify(ex)
+      rescue notify_error
+        Log.warn(exception: notify_error) { "Failed to notify Airbrake" }
+      end
       raise ex
     end
   end
@@ -19,18 +22,21 @@ module Airbrake
       Airbrake.config.uri,
       headers: HTTP::Headers{
         "Content-Type" => "application/json",
-        "User-Agent" => Airbrake.config.user_agent
+        "User-Agent"   => Airbrake.config.user_agent,
       },
       body: Airbrake::Error.payload(exception, params)
     )
+    return unless response.success?
     Hash(String, String).from_json(response.body)
+  rescue JSON::ParseException
+    nil
   end
 
   def self.should_notify?
     !config.development_environments.includes?(ENV.fetch("CRYSTAL_ENV", "development"))
   end
 
-  def self.configure
+  def self.configure(&)
     yield Config::INSTANCE
   end
 

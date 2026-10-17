@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  spec:
+    name: Spec (Crystal ${{ matrix.crystal }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal: ["1.0.0", latest]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal }}
+      - run: crystal spec
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: crystal-lang/install-crystal@v1
+      - run: crystal tool format --check src spec

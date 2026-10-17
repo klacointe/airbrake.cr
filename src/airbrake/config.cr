@@ -18,7 +18,7 @@ module Airbrake
 
     def uri
       uri = URI.parse(endpoint)
-      uri.path  = "/api/v3/projects/#{project_id}/notices"
+      uri.path = "/api/v3/projects/#{project_id}/notices"
       uri.query = "key=#{project_key}"
       uri
     end
